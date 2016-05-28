@@ -12,7 +12,7 @@ public class Pile {
         cardAmount = 0;
     }
 
-    public void addCard(Card card, int amount){
+    public void addCard(Card card, int amount) {
         Integer newAmount;
 
         if(inventory.containsKey(card)){

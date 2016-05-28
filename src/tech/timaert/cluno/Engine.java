@@ -1,13 +1,26 @@
 package tech.timaert.cluno;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Engine {
     private Pile drawPile;
     private Pile discardPile;
+    private Set<Player> players;
 
     public Engine() {
         drawPile = new Pile();
         discardPile = new Pile();
+        players = new HashSet<>();
         fillDrawPile();
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+    public int getPlayerAmount() {
+        return players.size();
     }
 
     public int getDrawPileSize() {

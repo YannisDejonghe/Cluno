@@ -15,7 +15,7 @@ public class Card {
         this.value = value;
     }
 
-    public Card(Type type){
+    public Card(Type type) {
         if(type == Type.WILD || type == Type.WILD_DRAW_FOUR) {
             this.type = type;
         }
