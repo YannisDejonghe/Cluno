@@ -3,20 +3,19 @@ package tech.timaert.cluno.tests;
 import org.junit.Before;
 import org.junit.Test;
 import tech.timaert.cluno.Engine;
-import tech.timaert.cluno.Player;
 
 import static org.junit.Assert.assertEquals;
 
 public class EngineTest {
     private Engine engine;
-    private Player playerOne;
-    private Player playerTwo;
+    private String playerOne;
+    private String playerTwo;
 
     @Before
     public void setUp() throws Exception {
         engine = new Engine();
-        playerOne = new Player("Mark");
-        playerTwo = new Player("George");
+        playerOne = "Mark";
+        playerTwo = "George";
     }
 
     @Test
@@ -31,5 +30,15 @@ public class EngineTest {
         engine.startGame();
         assertEquals(2, engine.getPlayerAmount());
         assertEquals(7, engine.getCurrentPlayer().getHand().size());
+    }
+
+    @Test
+    public void testCardPlay() {
+        engine.addPlayer(playerOne);
+        engine.addPlayer(playerTwo);
+        engine.startGame();
+        engine.getCurrentPlayer().playCard(2);
+        assertEquals(1, engine.getDiscardPileSize());
+        assertEquals(6, engine.getCurrentPlayer().getHand().size());
     }
 }

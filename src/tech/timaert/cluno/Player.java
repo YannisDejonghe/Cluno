@@ -19,4 +19,10 @@ public class Player {
     public List<Card> getHand() {
         return hand;
     }
+
+    public Card playCard(int cardIndex) {
+        Card cardToPlay = hand.get(cardIndex);
+        hand.remove(cardIndex);
+        return cardToPlay;
+    }
 }

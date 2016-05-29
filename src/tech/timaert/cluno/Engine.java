@@ -10,6 +10,7 @@ public class Engine {
     private Pile discardPile;
     private Set<Player> players;
     private Player currentPlayer;
+    private boolean winnerFound;
 
     public Engine() {
         drawPile = new Pile();
@@ -22,6 +23,13 @@ public class Engine {
         if(players.size() > 1) {
             dealStartingHands();
             currentPlayer = selectStartingPlayer();
+            winnerFound = false;
+            startGameLoop();
+        }
+    }
+
+    private void startGameLoop(){
+        while(!winnerFound) {
         }
     }
 
@@ -31,7 +39,7 @@ public class Engine {
 
     private void dealStartingHands() {
         Iterator<Player> playerIterator = players.iterator();
-        playerIterator.forEachRemaining((player) -> drawPile.dealCard(player, 7));
+        playerIterator.forEachRemaining(player -> drawPile.dealCard(player, 7));
     }
 
     private Player selectStartingPlayer() {
@@ -46,7 +54,8 @@ public class Engine {
         return player;
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(String playerName) {
+        Player player = new Player(playerName);
         players.add(player);
     }
 
@@ -56,6 +65,10 @@ public class Engine {
 
     public int getDrawPileSize() {
         return drawPile.getCardAmount();
+    }
+
+    public int getDiscardPileSize() {
+        return discardPile.getCardAmount();
     }
 
     private void fillDrawPile() {
