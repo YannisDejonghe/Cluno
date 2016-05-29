@@ -11,14 +11,12 @@ public class EngineTest {
     private Engine engine;
     private Player playerOne;
     private Player playerTwo;
-    private Player playerThree;
 
     @Before
     public void setUp() throws Exception {
         engine = new Engine();
         playerOne = new Player("Mark");
         playerTwo = new Player("George");
-        playerThree = new Player("Frank");
     }
 
     @Test
@@ -27,10 +25,11 @@ public class EngineTest {
     }
 
     @Test
-    public void testPlayerAdding() {
+    public void testGameSetup() {
         engine.addPlayer(playerOne);
         engine.addPlayer(playerTwo);
-        engine.addPlayer(playerThree);
-        assertEquals(3, engine.getPlayerAmount());
+        engine.startGame();
+        assertEquals(2, engine.getPlayerAmount());
+        assertEquals(7, engine.getCurrentPlayer().getHand().size());
     }
 }

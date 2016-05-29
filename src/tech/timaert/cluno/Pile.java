@@ -1,7 +1,6 @@
 package tech.timaert.cluno;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Pile {
     private Map<Card, Integer> inventory;
@@ -12,7 +11,7 @@ public class Pile {
         cardAmount = 0;
     }
 
-    public void addCard(Card card, int amount) {
+    public void updateCard(Card card, int amount) {
         Integer newAmount;
 
         if(inventory.containsKey(card)){
@@ -23,6 +22,17 @@ public class Pile {
 
         inventory.put(card, newAmount);
         cardAmount += amount;
+    }
+
+    public void dealCard(Player targetPlayer, int amount) {
+        Random random = new Random();
+        List<Card> cards = new ArrayList<>(inventory.keySet());
+
+        for(int i = 0; i < amount; i++) {
+            Card randomCard = cards.get(random.nextInt(cards.size()));
+            targetPlayer.drawCard(randomCard);
+            updateCard(randomCard, -1);
+        }
     }
 
     public int getCardAmount() {
