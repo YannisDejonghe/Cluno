@@ -10,6 +10,7 @@ public class Engine {
     private Pile discardPile;
     private Set<Player> players;
     private Player currentPlayer;
+    private Player winner;
     private boolean winnerFound;
 
     public Engine() {
@@ -24,17 +25,26 @@ public class Engine {
             dealStartingHands();
             currentPlayer = selectStartingPlayer();
             winnerFound = false;
-            startGameLoop();
         }
     }
 
-    private void startGameLoop(){
-        while(!winnerFound) {
+    public Player getWinner() {
+        return winner;
+    }
+
+    private void verifyWinCondition() {
+        if(currentPlayer.getHand().size() == 0 && currentPlayer.calledUno()){
+            winnerFound = true;
         }
     }
 
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public void currentPlayerPlayCard(int cardIndex) {
+        getCurrentPlayer().playCard(cardIndex);
+        discardPile.updateCard(getCurrentPlayer().getHand().get(cardIndex), 1);
     }
 
     private void dealStartingHands() {
